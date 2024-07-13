@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
 @Controller('users')
@@ -11,6 +11,7 @@ export class UsersController {
     }
 
     @Post()
+    @UsePipes(new ValidationPipe())
     createUser(@Body() userData: CreateUserDto) {
         console.log(userData)
         console.log(userData.username)
