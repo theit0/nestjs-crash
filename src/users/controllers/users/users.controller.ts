@@ -1,8 +1,10 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { AuthGuard } from 'src/users/guards/auth/auth.guard';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
+@UseGuards(AuthGuard)
 export class UsersController {
     constructor(private userService: UsersService) {
 
