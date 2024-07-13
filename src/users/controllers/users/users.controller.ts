@@ -1,12 +1,12 @@
-import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
 @Controller('users')
 export class UsersController {
 
     @Get()
-    getUsers() {
+    getUsers(@Query('sortBy') sortBy: string) {
+        console.log(sortBy)
         return { username: "Theo", email: "theopelegrina@gmail.com" }
     }
 
@@ -23,4 +23,6 @@ export class UsersController {
         console.log(id)
         return { id };
     }
+
+
 }
