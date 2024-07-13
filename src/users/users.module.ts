@@ -12,6 +12,11 @@ export class UsersModule implements NestModule {
     consumer.apply(ExampleMiddlewareMiddleware).forRoutes({
       path: "users",
       method: RequestMethod.GET
-    })
+    },
+      {
+        path: "users/:id",
+        method: RequestMethod.GET
+      }
+    )
   }
 }
