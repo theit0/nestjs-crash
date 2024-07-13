@@ -4,7 +4,6 @@ import { AuthGuard } from 'src/users/guards/auth/auth.guard';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
-@UseGuards(AuthGuard)
 export class UsersController {
     constructor(private userService: UsersService) {
 
@@ -16,6 +15,7 @@ export class UsersController {
     }
 
     @Post()
+    @UseGuards(AuthGuard)
     createUser(@Body() userData: CreateUserDto) {
         return this.userService.createUser(userData)
     }
