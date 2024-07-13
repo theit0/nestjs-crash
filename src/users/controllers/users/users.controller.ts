@@ -24,5 +24,4 @@ export class UsersController {
         return { id };
     }
 
-
 }
