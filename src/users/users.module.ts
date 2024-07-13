@@ -12,10 +12,7 @@ export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ExampleMiddlewareMiddleware)
-      .forRoutes({
-        path: "users",
-        method: RequestMethod.GET
-      },
+      .forRoutes(
         {
           path: "users/:id",
           method: RequestMethod.GET
