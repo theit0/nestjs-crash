@@ -3,8 +3,16 @@ import { UsersController } from './controllers/users/users.controller';
 import { UsersService } from './services/users/users.service';
 import { ExampleMiddlewareMiddleware } from './middlewares/example_middleware/example_middleware.middleware';
 import { AnotherMiddlewareMiddleware } from './middlewares/another_middleware/another_middleware.middleware';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from 'src/schemas/User.schema';
 
 @Module({
+  imports: [
+    MongooseModule.forFeature([{
+      name: User.name,
+      schema: UserSchema
+    }])
+  ],
   controllers: [UsersController],
   providers: [UsersService]
 })
