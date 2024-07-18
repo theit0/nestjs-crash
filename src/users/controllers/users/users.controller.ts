@@ -1,5 +1,7 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import mongoose from 'mongoose';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { UpdateUserDto } from 'src/users/dtos/UpdateUser.dto';
 import { AuthGuard } from 'src/users/guards/auth/auth.guard';
 import { UsersService } from 'src/users/services/users/users.service';
 
@@ -10,22 +12,47 @@ export class UsersController {
     }
 
     @Get()
-    getUsers() {
-        return this.userService.fetchAllUsers();
+    async getUsers() {
+        try {
+            const users = await this.userService.fetchAllUsers();
+            return users;
+        } catch (error) {
+            throw new HttpException("Error fetching all users", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Post()
     @UseGuards(AuthGuard)
     createUser(@Body() userData: CreateUserDto) {
-        return this.userService.createUser(userData)
+        try {
+            return this.userService.createUser(userData)
+        } catch (error) {
+            throw new HttpException("Error creating user", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @Get(':id')
-    getUserById(@Param('id', ParseIntPipe) id: number) {
-        const user = this.userService.fetchUserById(id);
-        if (!user)
+    async getUserById(@Param('id') id: string) {
+        try {
+            const user = await this.userService.fetchUserById(id);
+            return user;
+        } catch (error) {
             throw new HttpException("User not found", HttpStatus.BAD_REQUEST);
-        return user
+        }
+    }
+
+    @Put(':id')
+    async updateUser(@Param('id') id: string, @Body() newUser: UpdateUserDto) {
+        try {
+            const isIdValid = mongoose.Types.ObjectId.isValid(id);
+            if (!isIdValid) throw new Error()
+
+            const updatedUser = await this.userService.updateUser(id, newUser);
+            return updatedUser;
+        } catch (error) {
+            throw new HttpException("Error updating User", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
