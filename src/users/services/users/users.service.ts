@@ -8,22 +8,18 @@ import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectModel(User.name) private userModule: Model<User>) {
+    constructor(@InjectModel(User.name) private userModel: Model<User>) {
 
     }
 
-    private fakeUsers = [
-        { username: "Theo", email: "theopelegrina@gmail.com" },
-        { username: "Cristian", email: "cristianpelegrina@gmail.com" }
-    ];
 
     fetchAllUsers() {
-        return this.fakeUsers
+        return
     }
 
     createUser(userData: CreateUserDto) {
-        this.fakeUsers.push(userData)
-        return {}
+        const newUser = new this.userModel(userData)
+        return newUser.save();
     }
 
     fetchUserById(id: number) {
