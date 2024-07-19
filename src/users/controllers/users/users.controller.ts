@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import mongoose from 'mongoose';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UpdateUserDto } from 'src/users/dtos/UpdateUser.dto';
@@ -55,4 +55,12 @@ export class UsersController {
         }
     }
 
+    @Delete(':id')
+    async deleteUser(@Param('id') id: string) {
+        try {
+            return this.userService.deleteUser(id);
+        } catch (error) {
+            throw new HttpException("Error deleting User", HttpStatus.BAD_REQUEST);
+        }
+    }
 }

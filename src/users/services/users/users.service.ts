@@ -1,4 +1,4 @@
-import { Get, Injectable, Post, Put } from '@nestjs/common';
+import { Delete, Get, Injectable, Post, Put } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
@@ -36,4 +36,8 @@ export class UsersService {
     }
 
 
+    @Delete()
+    deleteUser(id: string) {
+        return this.userModel.findByIdAndDelete(id);
+    }
 }
