@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
 import mongoose from 'mongoose';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UpdateUserDto } from 'src/users/dtos/UpdateUser.dto';
@@ -41,7 +41,6 @@ export class UsersController {
             throw new HttpException("User not found", HttpStatus.BAD_REQUEST);
         }
     }
-
     @Put(':id')
     async updateUser(@Param('id') id: string, @Body() newUser: UpdateUserDto) {
         try {

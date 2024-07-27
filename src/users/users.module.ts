@@ -5,12 +5,16 @@ import { ExampleMiddlewareMiddleware } from './middlewares/example_middleware/ex
 import { AnotherMiddlewareMiddleware } from './middlewares/another_middleware/another_middleware.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schemas/User.schema';
+import { Settings, SettingsSchema } from 'src/schemas/Settings.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{
       name: User.name,
       schema: UserSchema
+    }, {
+      name: Settings.name,
+      schema: SettingsSchema
     }])
   ],
   controllers: [UsersController],
