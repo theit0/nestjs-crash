@@ -1,13 +1,7 @@
 import { Type } from "class-transformer";
-import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from "class-validator";
+import { CreateSettingsDto } from "./CreateSettings.dto";
 
-export class CreateSettingsDto {
-    @IsBoolean()
-    receiveNotifications: boolean;
-
-    @IsBoolean()
-    receiveEmails: boolean;
-}
 
 
 export class CreateUserDto {

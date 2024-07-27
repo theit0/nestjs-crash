@@ -16,12 +16,12 @@ export class UsersService {
 
     @Get()
     fetchAllUsers() {
-        return this.userModel.find().populate('settings');
+        return this.userModel.find();
     }
 
     @Get()
     fetchUserById(id: string) {
-        return this.userModel.findById(id);
+        return this.userModel.findById(id).populate('settings');
     }
 
     @Post()

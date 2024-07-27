@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, Post, RequestMethod } from '@nestjs/common';
 import { UsersController } from './controllers/users/users.controller';
 import { UsersService } from './services/users/users.service';
 import { ExampleMiddlewareMiddleware } from './middlewares/example_middleware/example_middleware.middleware';
@@ -6,6 +6,7 @@ import { AnotherMiddlewareMiddleware } from './middlewares/another_middleware/an
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schemas/User.schema';
 import { Settings, SettingsSchema } from 'src/schemas/Settings.schema';
+import { PostSchema } from 'src/schemas/Post.schema';
 
 @Module({
   imports: [
@@ -15,7 +16,12 @@ import { Settings, SettingsSchema } from 'src/schemas/Settings.schema';
     }, {
       name: Settings.name,
       schema: SettingsSchema
-    }])
+    },
+    {
+      name: Post.name,
+      schema: PostSchema
+    }
+    ])
   ],
   controllers: [UsersController],
   providers: [UsersService]
