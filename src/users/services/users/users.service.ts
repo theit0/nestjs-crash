@@ -16,7 +16,7 @@ export class UsersService {
 
     @Get()
     fetchAllUsers() {
-        return this.userModel.find();
+        return this.userModel.find().populate(['settings', 'posts']);
     }
 
     @Get()
