@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
 import mongoose from 'mongoose';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UpdateUserDto } from 'src/users/dtos/UpdateUser.dto';
 import { AuthGuard } from 'src/users/guards/auth/auth.guard';
@@ -23,6 +24,7 @@ export class UsersController {
 
     @Post()
     @UseGuards(AuthGuard)
+    @UseGuards(JwtAuthGuard)
     createUser(@Body() userData: CreateUserDto) {
         try {
             return this.userService.createUser(userData)
