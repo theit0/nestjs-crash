@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthPayloadDto } from './auth.dto';
+import { AuthPayloadDto } from './dtos/auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'src/schemas/User.schema';
 import { Model } from 'mongoose';
