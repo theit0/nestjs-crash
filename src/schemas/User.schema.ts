@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Settings } from "./Settings.schema";
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import { Post } from "./Post.schema";
 
 

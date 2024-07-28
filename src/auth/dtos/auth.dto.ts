@@ -6,5 +6,5 @@ export class AuthPayloadDto {
     username: string;
 
     @IsString()
-    password: string;
+    pass: string;
 }
